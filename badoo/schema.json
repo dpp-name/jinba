@@ -1,0 +1,326 @@
+{
+  "tags": {
+    "mode": {
+      "required": true,
+      "values": [
+        "action-hotornot",
+        "webapp-hotornot",
+        "webappframe-hotornot",
+        "action-badoo",
+        "ovl-badoo",
+        "ovl-hotornot",
+        "webapp-badoo",
+        "website-badoo",
+        "website-hotornot"
+      ]
+    },
+    "timer": {
+      "check_values": false,
+      "values": [
+        "api",
+        "app_init",
+        "backend",
+        "cclick_signin",
+        "cclick_signup",
+        "connect",
+        "dns",
+        "dom_interactive",
+        "dom_loaded",
+        "dom_loading",
+        "dom_ready",
+        "iframe_load",
+        "js_init",
+        "load_css",
+        "load_html",
+        "load_img",
+        "load_js",
+        "load_sidebar",
+        "navtime_error",
+        "on_load",
+        "photo_load",
+        "pure_connect",
+        "pure_dns",
+        "render_html",
+        "request",
+        "response",
+        "ttfb",
+        "usable",
+        "vote",
+        "wait",
+        "wf_usable",
+        "wfa_usable"
+      ]
+    },
+    "domain": {
+      "check_values": false,
+      "values": [
+        "hotornot.com",
+        "other",
+        "badoo",
+        "blendr.com",
+        "eu1_us1"
+      ]
+    },
+    "country": {"values": []},
+    "auth": {
+      "values": [
+        "true",
+        "false"
+      ]
+    },
+    "legacy": {
+      "values": [
+        "0",
+        "1"
+      ]
+    },
+    "platform": {
+      "values": [
+        "windows",
+        "mac",
+        "linux"
+      ]
+    },
+    "ua": {
+      "values": [
+        "cr",
+        "ff",
+        "ie10",
+        "ie11",
+        "ie8",
+        "ie9",
+        "op",
+        "wk",
+        "m",
+        "unk"
+      ]
+    },
+    "scheme": {
+      "values": [
+        "http",
+        "https",
+        "spdy"
+      ]
+    },
+    "script": {"values": []}
+  },
+  "reports": {
+    "table_prefix": "v2_jinba",
+    "percentile1": 75,
+    "percentile2": 95,
+    "tables": {
+      "": {
+        "rows_by": "timer",
+        "tags": [
+          "mode",
+          "timer"
+        ]
+      },
+      "country": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "country"
+        ]
+      },
+      "country_script": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "country",
+          "script"
+        ]
+      },
+      "domain": {
+        "rows_by": "domain",
+        "tags": [
+          "mode",
+          "timer",
+          "domain"
+        ]
+      },
+      "domain_country": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "country"
+        ]
+      },
+      "domain_country_script": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "country",
+          "script"
+        ]
+      },
+      "domain_scheme": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "scheme"
+        ]
+      },
+      "domain_scheme_country": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "scheme",
+          "country"
+        ]
+      },
+      "domain_scheme_country_script": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "scheme",
+          "country",
+          "script"
+        ]
+      },
+      "domain_scheme_script": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "scheme",
+          "script"
+        ]
+      },
+      "domain_scheme_ua": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "scheme",
+          "ua"
+        ]
+      },
+      "domain_scheme_ua_country": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "scheme",
+          "ua",
+          "country"
+        ]
+      },
+      "domain_scheme_ua_script": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "scheme",
+          "ua",
+          "script"
+        ]
+      },
+      "domain_script": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "script"
+        ]
+      },
+      "domain_ua": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "ua"
+        ]
+      },
+      "domain_ua_country": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "ua",
+          "country"
+        ]
+      },
+      "domain_ua_script": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "domain",
+          "ua",
+          "script"
+        ]
+      },
+      "scheme": {
+        "rows_by": "scheme",
+        "tags": [
+          "mode",
+          "timer",
+          "scheme"
+        ]
+      },
+      "scheme_ua": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "scheme",
+          "ua"
+        ]
+      },
+      "script": {
+        "rows_by": "script",
+        "tags": [
+          "mode",
+          "timer",
+          "script"
+        ]
+      },
+      "ua": {
+        "rows_by": "ua",
+        "tags": [
+          "mode",
+          "timer",
+          "ua"
+        ]
+      },
+      "ua_country": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "ua",
+          "country"
+        ]
+      },
+      "ua_script": {
+        "rows_by": "",
+        "tags": [
+          "mode",
+          "timer",
+          "ua",
+          "script"
+        ]
+      }
+    }
+  }
+}
