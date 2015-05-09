@@ -1,8 +1,10 @@
 
 var tpl = require('./tpl');
 var prettyMs = require('pretty-ms');
+var PromisePool = require('es6-promise-pool').PromisePool;
 
-var INSERT_BUCKET_SIZE = 10000;
+var INSERT_BUCKET_SIZE = 500;
+var INSERT_CONCURENCY = 20;
 
 function debuglog(msg)
 {
@@ -35,30 +37,40 @@ function insertData(influxClient, table, rows)
 {
     influxClient.setDatabase(table);
 
-    var sequence = Promise.resolve();
-
     var i = 0;
 
-    while (i < rows.length) {
-        var series = {};
-        for (var j = 0; j < INSERT_BUCKET_SIZE && i < rows.length; i++, j++) {
-            series[rows[i].name] = [{value: rows[i].points[0][0]}];
-        }
+    function promiseProducer()
+    {
+        if (i < rows.length) {
+            var series = {};
+            for (var j = 0; j < INSERT_BUCKET_SIZE && i < rows.length; i++, j++) {
+                series[rows[i].name] = [{value: rows[i].points[0][0]}];
+            }
 
-        sequence = sequence.then((function(series) {
-            return new Promise(function(resolve, reject) {
-                influxClient.writeSeries(series, function (err, body) {
+            return new Promise(function (resolve, reject)
+            {
+                //debuglog(table + ' ' + Math.round(i / INSERT_BUCKET_SIZE));
+                influxClient.writeSeries(series, function (err, body)
+                {
                     if (err) {
                         reject(err);
                         return;
                     }
-                    resolve(rows.length);
+                    resolve();
                 });
             });
-        }).bind(null, series));
+        } else {
+            return null;
+        }
     }
 
-    return sequence;
+    var pool = new PromisePool(promiseProducer, INSERT_CONCURENCY);
+
+    var poolPromise = pool.start();
+
+    return poolPromise.then(function() {
+        return rows.length;
+    });
 }
 
 function selectData(mysqlClient, table, tags, callback)
@@ -127,11 +139,14 @@ function createInfluxDatabases(influxClient, reports)
 
 function exportJob(mysqlClient, influxClient, dbName, tags) {
     var job_start = Date.now();
+    var insert_start = 0;
     process.stdout.write('% ' + dbName);
     return selectData(mysqlClient, dbName, tags).then(function(result) {
+        process.stdout.write(', n=' + result.length + ', s=' + prettyMs(Date.now() - job_start));
+        insert_start = Date.now();
         return insertData(influxClient, dbName, result);
     }).then(function(n) {
-        process.stdout.write(' ' + n + ' points in ' + prettyMs(Date.now() - job_start) + '\n');
+        process.stdout.write(', i=' + prettyMs(Date.now() - insert_start) + ', t=' + prettyMs(Date.now() - job_start)+ '\n');
         return n;
     });
 }
