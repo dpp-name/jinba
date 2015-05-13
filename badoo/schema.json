@@ -117,7 +117,7 @@
         ]
       },
       "country": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -125,7 +125,7 @@
         ]
       },
       "country_script": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -134,7 +134,7 @@
         ]
       },
       "domain": {
-        "rows_by": "domain",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -142,7 +142,7 @@
         ]
       },
       "domain_country": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -151,7 +151,7 @@
         ]
       },
       "domain_country_script": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -161,7 +161,7 @@
         ]
       },
       "domain_scheme": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -170,7 +170,7 @@
         ]
       },
       "domain_scheme_country": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -180,7 +180,7 @@
         ]
       },
       "domain_scheme_country_script": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -191,7 +191,7 @@
         ]
       },
       "domain_scheme_script": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -201,7 +201,7 @@
         ]
       },
       "domain_scheme_ua": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -211,7 +211,7 @@
         ]
       },
       "domain_scheme_ua_country": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -222,7 +222,7 @@
         ]
       },
       "domain_scheme_ua_script": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -233,7 +233,7 @@
         ]
       },
       "domain_script": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -242,7 +242,7 @@
         ]
       },
       "domain_ua": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -251,7 +251,7 @@
         ]
       },
       "domain_ua_country": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -261,7 +261,7 @@
         ]
       },
       "domain_ua_script": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -271,7 +271,7 @@
         ]
       },
       "scheme": {
-        "rows_by": "scheme",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -279,7 +279,7 @@
         ]
       },
       "scheme_ua": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -304,7 +304,7 @@
         ]
       },
       "ua_country": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
@@ -313,7 +313,7 @@
         ]
       },
       "ua_script": {
-        "rows_by": "",
+        "rows_by": "timer",
         "tags": [
           "mode",
           "timer",
