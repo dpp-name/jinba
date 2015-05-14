@@ -20,7 +20,7 @@ function MeasureNetworkTiming(jinbaRequest, is_wa_frame)
         return;
     }
 
-    jinbaRequest.set_start(start);
+    jinbaRequest.setTimeStart(start);
 
     // create fake timer to prevent request from ending before onload
     jinbaRequest.startMeasurement('nav-timing', '');

@@ -4,9 +4,20 @@ var JinbaConfig = require('./JinbaConfig');
 var MeasureNetworkTiming = require('./MeasureNetworkTiming');
 var MeasureAjaxImages = require('./MeasureAjaxImages');
 
+function config(config)
+{
+    var jinbaConfig = JinbaConfig.getInstance();
+    if (config.url) {
+        jinbaConfig.setUrl(config.url);
+    }
+    if (config.batchTimeout) {
+        jinbaConfig.setBatchTimeout(config.batchTimeout);
+    }
+}
+
 module.exports = {
+    config: config,
     Request: JinbaRequest,
-    Config: JinbaConfig,
     MeasureNetworkTiming: MeasureNetworkTiming,
     MeasureAjaxImages: MeasureAjaxImages
 };

@@ -22,8 +22,8 @@ function JinbaRequest(name, tags)
     this.name = name;
     this.tags = tags || {};
     this.value = 0;
-    this.timers = [];
-    this.timers_active = 0;
+    this.measurements = [];
+    this.measurements_active = 0;
     this._tmap = {};
 
     this.status = JinbaRequest.ACTIVE;
@@ -72,19 +72,19 @@ JinbaRequest.prototype = {
         return this.status === JinbaRequest.ACTIVE;
     },
     /**
-     * Abort stopping all timers
+     * Abort stopping all measurements
      */
     abort: function ()
     {
-        for (var i = 0, n = this.timers.length; i < n; i++) {
-            this.timers[i].stop();
+        for (var i = 0, n = this.measurements.length; i < n; i++) {
+            this.measurements[i].stop();
         }
-        this.timers_active = 0;
+        this.measurements_active = 0;
 
         this.status = JinbaRequest.ABORTED;
     },
     /**
-     * End request, data will be send automatically when all timers that belong to this request will stop.
+     * End request, data will be send automatically when all measurements that belong to this request will stop.
      * @param {number} [errorStatus]
      */
     end: function (errorStatus)
@@ -108,7 +108,7 @@ JinbaRequest.prototype = {
      */
     _end: function()
     {
-        if (this.status !== JinbaRequest.ENDED || this.timers_active) {
+        if (this.status !== JinbaRequest.ENDED || this.measurements_active) {
             return;
         }
 
@@ -140,7 +140,7 @@ JinbaRequest.prototype = {
     addMeasurement: function (name, value, tags)
     {
         var measurement = new JinbaMeasurement(name, tags, value);
-        this.timers.push(measurement);
+        this.measurements.push(measurement);
     },
     /**
      * Start measurement
@@ -157,16 +157,15 @@ JinbaRequest.prototype = {
         }
 
         var measurement = new JinbaMeasurement(name, tags);
-        this.timers.push(measurement);
+        this.measurements.push(measurement);
         this._tmap[id] = measurement;
-        this.timers_active++;
+        this.measurements_active++;
     },
     /**
      * Stop measurement
      * @param {string} id unique measurement id
-     * @param {string} name
      */
-    stopMeasurement: function (id, name)
+    stopMeasurement: function (id)
     {
         var measurement = this._tmap[id];
         if (!measurement) {
@@ -177,7 +176,7 @@ JinbaRequest.prototype = {
         }
 
         measurement.stop();
-        this.timers_active--;
+        this.measurements_active--;
 
         this._end();
     },
@@ -199,12 +198,12 @@ JinbaRequest.prototype = {
         delete this._tmap[id];
 
         if (measurement.isActive()) {
-            this.timers_active--;
+            this.measurements_active--;
         }
 
-        for (var i = 0, n = this.timers.length; i < n; i++) {
-            if (measurement === this.timers[i]) {
-                this.timers[i].splice(i, 1);
+        for (var i = 0, n = this.measurements.length; i < n; i++) {
+            if (measurement === this.measurements[i]) {
+                this.measurements.splice(i, 1);
             }
         }
 
@@ -216,16 +215,16 @@ JinbaRequest.prototype = {
      */
     toJSON: function ()
     {
-        var timers = [];
-        for (var i = 0, n = this.timers.length; i < n; i++) {
-            timers.push(this.timers[i].toJSON());
+        var measurements = [];
+        for (var i = 0, n = this.measurements.length; i < n; i++) {
+            measurements.push(this.measurements[i].toJSON());
         }
 
         return {
             name: this.name,
             value: this.value,
             tags: this.tags,
-            timers: timers
+            measurements: measurements
         };
     }
 };

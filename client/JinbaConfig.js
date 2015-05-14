@@ -8,7 +8,7 @@ function JinbaConfig()
     this._ua = '';
 
     this.url = '';
-    this.sendTimeout = 500;
+    this.batchTimeout = 1000;
 }
 
 JinbaConfig.prototype = {
