@@ -21,12 +21,7 @@ function authorizeWebApi(url, authData)
             }
             resolve();
         });
-    }).then(function() {
-            console.log('logined successfully');
-        }).catch(function(err) {
-            console.error('login failed ' + err);
-            process.exit(1);
-        });
+    });
 }
 
 function createDataSource(url, options)
@@ -60,11 +55,7 @@ function createDataSource(url, options)
             }
             resolve();
         });
-    }).then(function() {
-            console.log('created ' + options.table);
-        }).catch(function(err) {
-            console.error('failed ' + options.table + ' ' + err);
-        });
+    });
 }
 
 
@@ -438,15 +429,11 @@ function createReportDashboard(url, grafanaKey, schema, name)
             }
             resolve();
         });
-    }).then(function() {
-            console.log('created ' + name);
-        }).catch(function(err) {
-            console.error('failed ' + err);
-        });
+    });
 }
 
 module.exports = {
     authorizeWebApi: authorizeWebApi,
     createDataSource: createDataSource,
     createReportDashboard: createReportDashboard
-}
+};
