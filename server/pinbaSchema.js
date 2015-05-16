@@ -2,9 +2,16 @@
 var tpl = require('./tpl');
 
 var percentile1 = '75', percentile2 = '95';
-var table_prefix = '';
 
-var table_schema = "CREATE TABLE `{table_prefix}{name}` (\n\
+function config(_percentile1, _percentile2)
+{
+    percentile1 = _percentile1;
+    percentile2 = _percentile2;
+}
+
+function createReportTable(mysqlClient, tableName, tags)
+{
+    var table_schema = "CREATE TABLE IF NOT EXISTS `{tableName}` (\n\
 {#tag}\
     `{.}` varchar(64) DEFAULT NULL,\n\
 {/tag}\n\
@@ -23,7 +30,28 @@ var table_schema = "CREATE TABLE `{table_prefix}{name}` (\n\
 COMMENT='tagN_info:{#tag}{.}{@sep},{/sep}{/tag}::{percentile1},{percentile2}';\n\
 ";
 
-var table_hv_schema = "CREATE TABLE `{table_prefix}{name}_hv` (\n\
+    return new Promise(function(resolve, reject) {
+        var query = tpl(table_schema, {
+            tableName: tableName,
+            tag: tags,
+            percentile1: percentile1,
+            percentile2: percentile2
+        });
+
+        mysqlClient.query(query, function(err, rows, fields) {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            resolve(tableName);
+        });
+    });
+}
+
+function createReportHistogram(mysqlClient, tableName, tags)
+{
+    var table_hv_schema = "CREATE TABLE IF NOT EXISTS `{tableName}_hv` (\n\
     `index_value` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,\n\
     `segment` int(11) DEFAULT NULL,\n\
     `time_value` float DEFAULT NULL,\n\
@@ -31,47 +59,63 @@ var table_hv_schema = "CREATE TABLE `{table_prefix}{name}_hv` (\n\
     `percent` float DEFAULT NULL,\n\
     KEY `index_value` (`index_value`(85))\n\
 ) ENGINE=PINBA DEFAULT CHARSET=latin1\n\
-COMMENT='hv.tagN_info:{#tag}{.}{@sep},{/sep}{/tag}::{percentile1},{percentile2};\n\
+COMMENT='hv.tagN_info:{#tag}{.}{@sep},{/sep}{/tag}::{percentile1},{percentile2}';\n\
 ";
 
-function createReportTable(name, tags)
-{
-	return tpl(table_schema, {
-		name: name,
-		tag: tags,
-		table_prefix: table_prefix,
-		percentile1: percentile1,
-		percentile2: percentile2
-	});
-}
+    return new Promise(function(resolve, reject) {
+        var query = tpl(table_hv_schema, {
+            tableName: tableName,
+            tag: tags,
+            percentile1: percentile1,
+            percentile2: percentile2
+        });
 
-function createReportHistogram(name, tags)
-{
-    return tpl(table_hv_schema, {
-        name: name,
-        tag: tags,
-        table_prefix: table_prefix,
-        percentile1: percentile1,
-        percentile2: percentile2
+        mysqlClient.query(query, function(err, rows, fields) {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            resolve(tableName);
+        });
     });
 }
 
-function createReport(name, tags)
+function createReport(mysqlClient, table_prefix, name, tags)
 {
-    var sql = createReportTable(name, tags);
-    console.log(sql);
-    sql = createReportHistogram(name, tags);
-    console.log(sql);
+    var tableName = name ? table_prefix + '_' + name : table_prefix;
+    return Promise.resolve()
+        .then(createReportTable.bind(null, mysqlClient, tableName, tags))
+        .then(createReportHistogram.bind(null, mysqlClient, tableName, tags));
 }
 
-function config(_table_prefix, _percentile1, _percentile2)
+function listReports(mysqlClient, table_prefix)
 {
-    table_prefix = _table_prefix;
-    percentile1 = _percentile1;
-    percentile2 = _percentile2;
+    var show_tables = "SELECT table_name FROM information_schema.Tables WHERE table_schema='pinba' AND table_name LIKE '{table_prefix}%';";
+
+    return new Promise(function(resolve, reject) {
+        var query = tpl(show_tables, {
+            table_prefix: table_prefix
+        });
+
+        mysqlClient.query(query, function(err, rows, fields) {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            var result = [];
+            for (var i = 0; i < rows.length; i++) {
+                result.push(rows[i].table_name);
+            }
+
+            resolve(result);
+        });
+    });
 }
 
 module.exports = {
+    listReports: listReports,
     createReport: createReport,
     config: config
 };
