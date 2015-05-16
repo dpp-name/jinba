@@ -3,7 +3,7 @@ var tpl = require('./tpl');
 
 var percentile1 = '75', percentile2 = '95';
 
-function config(_percentile1, _percentile2)
+function setPercentiles(_percentile1, _percentile2)
 {
     percentile1 = _percentile1;
     percentile2 = _percentile2;
@@ -11,6 +11,7 @@ function config(_percentile1, _percentile2)
 
 function createReportTable(mysqlClient, tableName, tags)
 {
+    //TODO add tag filters
     var table_schema = "CREATE TABLE IF NOT EXISTS `{tableName}` (\n\
 {#tag}\
     `{.}` varchar(64) DEFAULT NULL,\n\
@@ -81,12 +82,12 @@ COMMENT='hv.tagN_info:{#tag}{.}{@sep},{/sep}{/tag}::{percentile1},{percentile2}'
     });
 }
 
-function createReport(mysqlClient, table_prefix, name, tags)
+function createReport(options)
 {
-    var tableName = name ? table_prefix + '_' + name : table_prefix;
+    var tableName = options.name ? options.tablePrefix + '_' + options.name : options.tablePrefix;
     return Promise.resolve()
-        .then(createReportTable.bind(null, mysqlClient, tableName, tags))
-        .then(createReportHistogram.bind(null, mysqlClient, tableName, tags));
+        .then(createReportTable.bind(null, options.mysqlClient, tableName, options.tags))
+        .then(createReportHistogram.bind(null, options.mysqlClient, tableName, options.tags));
 }
 
 function listReports(mysqlClient, table_prefix)
@@ -117,5 +118,5 @@ function listReports(mysqlClient, table_prefix)
 module.exports = {
     listReports: listReports,
     createReport: createReport,
-    config: config
+    setPercentiles: setPercentiles
 };
