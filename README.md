@@ -12,6 +12,10 @@ In example-badoo folder you can find some scripts that can help you to set up co
 
 ## JavaScript Client
 
+### API
+
+http://dpp-name.github.io/jinba/
+
 ### Build JavaScript Client
 
 Jinba JavaScript client is written using CommonJS module format. You can use it directily in nodejs or use webpack to build for browser.
