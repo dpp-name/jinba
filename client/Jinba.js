@@ -3,6 +3,7 @@ var JinbaRequest = require('./JinbaRequest');
 var JinbaConfig = require('./JinbaConfig');
 var MeasureNetworkTiming = require('./MeasureNetworkTiming');
 var MeasureAjaxImages = require('./MeasureAjaxImages');
+var AddUserTimings = require('./AddUserTimings');
 
 function config(config)
 {
@@ -19,5 +20,6 @@ module.exports = {
     config: config,
     Request: JinbaRequest,
     MeasureNetworkTiming: MeasureNetworkTiming,
-    MeasureAjaxImages: MeasureAjaxImages
+    MeasureAjaxImages: MeasureAjaxImages,
+    AddUserTimings: AddUserTimings
 };
