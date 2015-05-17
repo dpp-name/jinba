@@ -1,7 +1,7 @@
 
 var mysql = require('mysql');
 
-var pinbaSchema = require('../server/pinbaSchema');
+var pinbaSchema = require('../utils/pinbaSchema');
 var schema = require('./schema.json');
 
 pinbaSchema.setPercentiles(

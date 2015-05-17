@@ -4,7 +4,7 @@ var start_time = Date.now();
 var mysql = require('mysql');
 var influx = require('influx');
 var prettyMs = require('pretty-ms');
-var pinba2influxdb = require('../server/pinba2influxdb');
+var pinba2influxdb = require('../utils/pinba2influxdb');
 var schema = require('./schema.json');
 
 var mysqlClient = mysql.createConnection({
