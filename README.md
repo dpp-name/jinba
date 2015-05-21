@@ -2,25 +2,11 @@
 
 This is early release for my talk http://frontendconf.ru/2015/abstracts/1777 we will improve it later :)
 
-Jinba is simple micro-library which helps to collect and send different performance measurements.
-Currently we open-source only JavaScript implementation of client but hopefully will release Android/iOS soon.
-
 Jinba is all about Real User Measurements (RUM) and how to collect/receive/store/visualize RUM data.
 
+Currently we open-source only JavaScript implementation of client https://github.com/dpp-name/jinba-js-client but hopefully will release Android/iOS soon.
+
 In example-badoo folder you can find some scripts that can help you to set up collection/visualization infrastructure.
-
-
-## JavaScript Client
-
-### API
-
-http://dpp-name.github.io/jinba/
-
-### Build JavaScript Client
-
-Jinba JavaScript client is written using CommonJS module format. You can use it directily in nodejs or use webpack to build for browser.
-
-    webpack -p --output-library="Jinba" --output-library-target="var" js-client/Jinba.js dist/Jinba.Client.min.js
 
 ### Usage example
 ```html
