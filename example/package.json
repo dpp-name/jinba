@@ -1,0 +1,8 @@
+{
+  "name": "example",
+  "dependencies": {
+    "jinba-js-client": "^0.0.2",
+    "node-static": "^0.7.6",
+    "webpack": "^1.9.7"
+  }
+}
