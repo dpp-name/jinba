@@ -8,6 +8,12 @@ Currently we open-source only JavaScript implementation of client https://github
 
 In example-badoo folder you can find some scripts that can help you to set up collection/visualization infrastructure.
 
+### Demo
+
+	cd example
+	npm install
+	node demo-server.js
+
 ### Usage example
 ```html
 <script src="Jinba.Client.min.js"></script>
