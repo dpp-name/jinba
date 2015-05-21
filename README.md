@@ -11,9 +11,11 @@ In example-badoo folder you can find some scripts that can help you to set up co
 ### Demo
 
 Demo folder contains simple node/webpack devel server with couple of examples. To set up demo use:
-	cd demo
-	npm install
-	node demo-server.js
+```bash
+cd demo
+npm install
+node demo-server.js
+```
 
 ### Usage example
 ```html
