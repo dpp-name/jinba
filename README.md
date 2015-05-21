@@ -19,7 +19,7 @@ node demo-server.js
 
 ## Setting up infrastructure
 
-1. Collect data
+1. Collect data (for web clients use https://github.com/dpp-name/jinba-js-client/)
 2. Setup backend endpoint
 3. Setup http://pinba.org/
 4. See example-badoo/create_schema.js to create pinba reports.
