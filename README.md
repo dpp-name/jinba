@@ -17,30 +17,6 @@ npm install
 node demo-server.js
 ```
 
-### Usage example
-```html
-<script src="Jinba.Client.min.js"></script>
-<script>
-    Jinba.config({
-        url:'/jinba/',
-        batchTimeout: 1000
-    });
-    var TAG_WEBSITE = {
-        app_label: 'example'
-    };
-    window.addEventListener('DOMContentLoaded', function() {
-        var jinbaRequest = new Jinba.Request(location.pathname, TAG_WEBSITE);
-        Jinba.MeasureNetworkTiming(jinbaRequest);
-
-        jinbaRequest.startMeasurement('app-init-id', 'app_init');
-        // Application.init();
-        jinbaRequest.stopMeasurement('app-init-id');
-        jinbaRequest.end();
-    });
-</script>
-```
-
-
 ## Setting up infrastructure
 
 1. Collect data
