@@ -1,6 +1,7 @@
 # Jinba
 
 This is early release for my talk http://frontendconf.ru/2015/abstracts/1777 we will improve it later :)
+Slides from the talk: http://www.slideshare.net/dppsu/jinba-frontendconfru-2015final
 
 Jinba is all about Real User Measurements (RUM) and how to collect/receive/store/visualize RUM data.
 
